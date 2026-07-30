@@ -296,9 +296,11 @@ export default function Home() {
       <section id="top" className="hero">
         <div className="hero-frame">
           <div className="hero-media">
-            <div className="photo-placeholder hero-placeholder">
-              <span>ภาพจานเด่นคู่กับวิวริมน้ำ</span>
-            </div>
+            <img
+              src="/images/hero-restaurant.jpg"
+              alt="บรรยากาศร้านตำปูม้าคาเฟ่"
+              className="hero-photo"
+            />
           </div>
           <div className="hero-scrim" />
         </div>
@@ -366,15 +368,24 @@ export default function Home() {
           </div>
         </div>
         <div className="story-collage" aria-label="ช่องสำหรับภาพบรรยากาศร้าน">
-          <div className="photo-placeholder collage-main" data-reveal>
-            <span>ภาพตำปูม้าระยะใกล้</span>
-          </div>
-          <div className="photo-placeholder collage-square" data-reveal>
-            <span>โต๊ะอาหารริมน้ำ</span>
-          </div>
-          <div className="photo-placeholder collage-small" data-reveal>
-            <span>กาแฟของร้าน</span>
-          </div>
+          <img
+            className="collage-photo collage-main"
+            src="/images/restaurant-flags.jpg"
+            alt="บรรยากาศโซนกลางแจ้งของร้าน"
+            data-reveal
+          />
+          <img
+            className="collage-photo collage-square"
+            src="/images/restaurant-tree.jpg"
+            alt="โต๊ะอาหารใต้ต้นไม้ใหญ่"
+            data-reveal
+          />
+          <img
+            className="collage-photo collage-small"
+            src="/images/tam-pu-ma.jpg"
+            alt="ตำปูม้าของร้าน"
+            data-reveal
+          />
         </div>
       </section>
 
@@ -410,13 +421,18 @@ export default function Home() {
         <div className="menu-rail">
           {visibleMenu.map((item, index) => (
             <article className="menu-card" key={item.title}>
-              <div className={`menu-photo photo-tone-${index % 4}`}>
+              <div
+                className={`menu-photo photo-tone-${index % 4} ${
+                  item.image ? "has-image" : ""
+                }`}
+              >
+                {item.image && <img src={item.image} alt={item.title} />}
                 <div className="badges">
                   {item.badges.map((badge) => (
                     <span key={badge}>{badge}</span>
                   ))}
                 </div>
-                <span>{item.slot}</span>
+                {!item.image && <span>{item.slot}</span>}
               </div>
               <div className="menu-card-body">
                 <h3>{item.title}</h3>
@@ -434,9 +450,10 @@ export default function Home() {
 
       <section className="cinematic-section">
         <div className="cinematic-frame">
-          <div className="photo-placeholder">
-            <span>ภาพอาหารมุมกว้าง</span>
-          </div>
+          <img
+            src="/images/restaurant-dining.jpg"
+            alt="บรรยากาศรับประทานอาหารริมน้ำ"
+          />
           <strong>สด แซ่บ ถึงรส</strong>
         </div>
       </section>
@@ -456,16 +473,16 @@ export default function Home() {
         <div className="gallery-wrap" ref={galleryWrap}>
           <div className="gallery-sticky">
             <div className="gallery-track" ref={galleryTrack}>
-              {galleryItems.map((caption, index) => (
+              {galleryItems.map((item, index) => (
                 <button
                   className={`gallery-card gallery-card-${index + 1}`}
                   type="button"
-                  key={caption}
+                  key={item.caption}
                   onClick={() => setLightbox(index)}
-                  aria-label={`เปิดภาพ ${caption}`}
+                  aria-label={`เปิดภาพ ${item.caption}`}
                 >
-                  <span className="slot-label">ช่องสำหรับภาพจริงของร้าน</span>
-                  <strong>{caption}</strong>
+                  <img src={item.src} alt="" />
+                  <strong>{item.caption}</strong>
                   <span className="zoom-mark">＋</span>
                 </button>
               ))}
@@ -655,10 +672,11 @@ export default function Home() {
           >
             ×
           </button>
-          <div className="lightbox-slot">
-            <span>ยังไม่ได้ใส่รูปในช่องนี้</span>
-            <small>แทนที่ด้วยรูปจริงของร้านได้ภายหลัง</small>
-          </div>
+          <img
+            className="lightbox-photo"
+            src={galleryItems[lightbox].src}
+            alt={galleryItems[lightbox].caption}
+          />
           <div className="lightbox-controls">
             <button
               type="button"
@@ -668,7 +686,7 @@ export default function Home() {
               ←
             </button>
             <div>
-              <strong>{galleryItems[lightbox]}</strong>
+              <strong>{galleryItems[lightbox].caption}</strong>
               <span>
                 {lightbox + 1} / {galleryItems.length}
               </span>

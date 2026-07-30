@@ -23,6 +23,7 @@ export const menuItems = [
     categories: ["signature", "seafood"],
     badges: ["แนะนำ", "เผ็ด"],
     slot: "รูปตำปูม้าระยะใกล้",
+    image: "/images/tam-pu-ma.jpg",
   },
   {
     title: "ปูม้านึ่ง",
@@ -30,6 +31,7 @@ export const menuItems = [
     categories: ["seafood"],
     badges: ["ขายดี", "อาหารทะเล"],
     slot: "รูปปูม้านึ่ง",
+    image: null,
   },
   {
     title: "อาหารทะเลสด",
@@ -37,6 +39,7 @@ export const menuItems = [
     categories: ["seafood"],
     badges: ["สดทุกวัน"],
     slot: "รูปอาหารทะเลสด",
+    image: null,
   },
   {
     title: "เมนูยำ",
@@ -44,6 +47,7 @@ export const menuItems = [
     categories: ["signature"],
     badges: ["แนะนำ", "เผ็ด"],
     slot: "รูปเมนูยำ",
+    image: "/images/tam-luang-prabang.png",
   },
   {
     title: "กาแฟและเครื่องดื่ม",
@@ -51,6 +55,7 @@ export const menuItems = [
     categories: ["drinks"],
     badges: ["คาเฟ่"],
     slot: "รูปกาแฟหรือเครื่องดื่ม",
+    image: null,
   },
   {
     title: "ของหวาน",
@@ -58,17 +63,39 @@ export const menuItems = [
     categories: ["drinks"],
     badges: ["ของหวาน"],
     slot: "รูปของหวาน",
+    image: null,
   },
 ] as const;
 
 export const galleryItems = [
-  "บรรยากาศริมน้ำของร้าน",
-  "โต๊ะอาหารกลางแจ้ง",
-  "ดนตรีสดช่วงค่ำ",
-  "อาหารจานเด่นของร้าน",
-  "กาแฟและเครื่องดื่ม",
-  "พระอาทิตย์ตกริมน้ำ",
-  "ลูกค้าและกิจกรรมในร้าน",
+  {
+    caption: "บรรยากาศริมน้ำของร้าน",
+    src: "/images/hero-restaurant.jpg",
+  },
+  {
+    caption: "โต๊ะอาหารกลางแจ้ง",
+    src: "/images/restaurant-flags.jpg",
+  },
+  {
+    caption: "ดนตรีสดช่วงค่ำ",
+    src: "/images/music-live.jpg",
+  },
+  {
+    caption: "ตำปูม้าจานเด่นของร้าน",
+    src: "/images/tam-pu-ma.jpg",
+  },
+  {
+    caption: "มุม Coffee Bar",
+    src: "/images/coffee-bar.jpg",
+  },
+  {
+    caption: "วิวสายน้ำข้างร้าน",
+    src: "/images/river-view.jpg",
+  },
+  {
+    caption: "ลูกค้าและบรรยากาศช่วงค่ำ",
+    src: "/images/restaurant-night.jpg",
+  },
 ] as const;
 
 export const sampleReviews = [
