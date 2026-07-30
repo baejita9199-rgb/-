@@ -141,15 +141,16 @@ export default function Home() {
       const progress = galleryProgress.current;
       if (!wrap || !track || !progress) return;
 
-      const desktop = window.matchMedia(
-        "(min-width: 1080px) and (hover: hover) and (pointer: fine)",
-      ).matches;
+      const desktop = window.innerWidth >= 1080;
 
       if (!desktop || reduceMotion) {
         const max = track.scrollWidth - wrap.clientWidth;
         progress.style.width = `${
           max > 0 ? (wrap.scrollLeft / max) * 100 : 0
         }%`;
+        if (progress.parentElement) {
+          progress.parentElement.style.opacity = "1";
+        }
         return;
       }
 
@@ -159,15 +160,17 @@ export default function Home() {
       const amount = Math.max(0, Math.min(1, max ? -rect.top / max : 0));
       track.style.transform = `translate3d(${-distance * amount}px, 0, 0)`;
       progress.style.width = `${amount * 100}%`;
+      if (progress.parentElement) {
+        progress.parentElement.style.opacity =
+          rect.top <= 1 && rect.bottom >= vh - 1 ? "1" : "0";
+      }
     };
 
     const layoutGallery = () => {
       const wrap = galleryWrap.current;
       const track = galleryTrack.current;
       if (!wrap || !track) return;
-      const desktop = window.matchMedia(
-        "(min-width: 1080px) and (hover: hover) and (pointer: fine)",
-      ).matches;
+      const desktop = window.innerWidth >= 1080;
       if (desktop && !reduceMotion) {
         const distance = Math.max(
           0,
@@ -193,6 +196,7 @@ export default function Home() {
       revealObserver?.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", layoutGallery);
+      galleryWrap.current?.removeEventListener("scroll", onScroll);
     };
   }, []);
 
