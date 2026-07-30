@@ -821,7 +821,7 @@ h2 {
 .gallery-wrap {
   position: relative;
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .gallery-wrap::-webkit-scrollbar {
@@ -829,8 +829,7 @@ h2 {
 }
 
 .gallery-sticky {
-  position: sticky;
-  top: 0;
+  position: relative;
   width: 100%;
   height: 100vh;
   min-height: 620px;
@@ -949,7 +948,7 @@ h2 {
 }
 
 .gallery-progress {
-  position: fixed;
+  position: absolute;
   z-index: 20;
   right: 12%;
   bottom: 28px;
@@ -958,7 +957,7 @@ h2 {
   overflow: hidden;
   border-radius: 999px;
   background: rgba(18, 59, 70, 0.14);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 220ms ease;
 }
 

@@ -31,6 +31,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [lightbox, setLightbox] = useState<number | null>(null);
   const galleryWrap = useRef<HTMLDivElement>(null);
+  const gallerySticky = useRef<HTMLDivElement>(null);
   const galleryTrack = useRef<HTMLDivElement>(null);
   const galleryProgress = useRef<HTMLDivElement>(null);
 
@@ -75,6 +76,9 @@ export default function Home() {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    let galleryOffset = 0;
+    let galleryDistance = 0;
+    let galleryFrame = 0;
 
     const revealObserver = reduceMotion
       ? null
@@ -153,31 +157,65 @@ export default function Home() {
         }
         return;
       }
+    };
 
-      const distance = Math.max(0, track.scrollWidth - window.innerWidth + 48);
-      const rect = wrap.getBoundingClientRect();
-      const max = wrap.offsetHeight - vh;
-      const amount = Math.max(0, Math.min(1, max ? -rect.top / max : 0));
-      track.style.transform = `translate3d(${-distance * amount}px, 0, 0)`;
+    const paintGallery = () => {
+      const track = galleryTrack.current;
+      const progress = galleryProgress.current;
+      if (!track || !progress) return;
+      const amount =
+        galleryDistance > 0 ? galleryOffset / galleryDistance : 0;
+      track.style.transform = `translate3d(${-galleryOffset}px, 0, 0)`;
       progress.style.width = `${amount * 100}%`;
-      if (progress.parentElement) {
-        progress.parentElement.style.opacity =
-          rect.top <= 1 && rect.bottom >= vh - 1 ? "1" : "0";
+    };
+
+    const onGalleryWheel = (event: WheelEvent) => {
+      if (window.innerWidth < 1080 || reduceMotion || galleryDistance <= 0) {
+        return;
       }
+
+      const rawDelta =
+        Math.abs(event.deltaY) >= Math.abs(event.deltaX)
+          ? event.deltaY
+          : event.deltaX;
+      const delta =
+        event.deltaMode === WheelEvent.DOM_DELTA_LINE
+          ? rawDelta * 24
+          : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
+            ? rawDelta * window.innerHeight
+            : rawDelta;
+      const next = Math.max(
+        0,
+        Math.min(galleryDistance, galleryOffset + delta),
+      );
+
+      if (next === galleryOffset) return;
+
+      event.preventDefault();
+      galleryOffset = next;
+      window.cancelAnimationFrame(galleryFrame);
+      galleryFrame = window.requestAnimationFrame(paintGallery);
     };
 
     const layoutGallery = () => {
       const wrap = galleryWrap.current;
+      const sticky = gallerySticky.current;
       const track = galleryTrack.current;
-      if (!wrap || !track) return;
+      if (!wrap || !sticky || !track) return;
       const desktop = window.innerWidth >= 1080;
       if (desktop && !reduceMotion) {
-        const distance = Math.max(
+        const previousProgress =
+          galleryDistance > 0 ? galleryOffset / galleryDistance : 0;
+        galleryDistance = Math.max(
           0,
-          track.scrollWidth - window.innerWidth + 48,
+          track.scrollWidth - sticky.clientWidth + 48,
         );
-        wrap.style.height = `${window.innerHeight + distance}px`;
+        galleryOffset = galleryDistance * previousProgress;
+        wrap.style.height = "";
+        paintGallery();
       } else {
+        galleryDistance = 0;
+        galleryOffset = 0;
         wrap.style.height = "";
         track.style.transform = "";
       }
@@ -189,14 +227,19 @@ export default function Home() {
     galleryWrap.current?.addEventListener("scroll", onScroll, {
       passive: true,
     });
+    gallerySticky.current?.addEventListener("wheel", onGalleryWheel, {
+      passive: false,
+    });
     const timer = window.setTimeout(layoutGallery, 150);
 
     return () => {
       window.clearTimeout(timer);
+      window.cancelAnimationFrame(galleryFrame);
       revealObserver?.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", layoutGallery);
       galleryWrap.current?.removeEventListener("scroll", onScroll);
+      gallerySticky.current?.removeEventListener("wheel", onGalleryWheel);
     };
   }, []);
 
@@ -475,7 +518,7 @@ export default function Home() {
           <p>เลื่อนชมบรรยากาศ แล้วเลือกมุมโปรดของคุณ</p>
         </div>
         <div className="gallery-wrap" ref={galleryWrap}>
-          <div className="gallery-sticky">
+          <div className="gallery-sticky" ref={gallerySticky}>
             <div className="gallery-track" ref={galleryTrack}>
               {galleryItems.map((item, index) => (
                 <button
