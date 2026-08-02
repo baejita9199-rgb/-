@@ -98,6 +98,88 @@ export const galleryItems = [
   },
 ] as const;
 
+export const highlightDishes = [
+  {
+    title: "ตำปูม้า",
+    description: "ปูม้าสด เนื้อหวาน คลุกน้ำปลาร้ารสนัว",
+    image: "/images/tam-pu-ma.jpg",
+    badge: "ซิกเนเจอร์",
+    slot: null,
+  },
+  {
+    title: "ตำหลวงพระบาง",
+    description: "เครื่องแน่น รสแซ่บ เปรี้ยวนำ",
+    image: "/images/tam-luang-prabang.png",
+    badge: null,
+    slot: null,
+  },
+  {
+    title: "ปูม้านึ่ง",
+    description: "นึ่งพอดี เสิร์ฟกับน้ำจิ้มซีฟู้ด",
+    image: null,
+    badge: null,
+    slot: "รูปปูม้านึ่ง",
+  },
+  {
+    title: "ชุดหม้อไฟทะเล",
+    description: "อาหารทะเลสดจัดชุด สำหรับแบ่งกัน",
+    image: "/images/hotpot-menu.png",
+    badge: null,
+    slot: null,
+  },
+  {
+    title: "ยำรวมมิตรทะเล",
+    description: "เปรี้ยว เค็ม หวาน เผ็ด ลงตัว",
+    image: null,
+    badge: null,
+    slot: "รูปยำรวมมิตรทะเล",
+  },
+  {
+    title: "กาแฟริมน้ำ",
+    description: "คั่วหอม จิบเพลินรับลมเย็น",
+    image: "/images/coffee-bar.jpg",
+    badge: null,
+    slot: null,
+  },
+  {
+    title: "ของหวานประจำวัน",
+    description: "ปิดท้ายมื้อด้วยความสดชื่น",
+    image: null,
+    badge: null,
+    slot: "รูปของหวาน",
+  },
+  {
+    title: "ปลาเผาเกลือ",
+    description: "หอมเกลือ เนื้อฉ่ำ เสิร์ฟทั้งตัว",
+    image: null,
+    badge: null,
+    slot: "รูปปลาเผาเกลือ",
+  },
+  {
+    title: "ส้มตำไข่เค็ม",
+    description: "มันไข่เค็มตัดรสแซ่บกำลังดี",
+    image: null,
+    badge: null,
+    slot: "รูปส้มตำไข่เค็ม",
+  },
+] as const;
+
+// รีวิวตัวแทนสำหรับจัดหน้า — รอเปลี่ยนเป็นรีวิวจริงพร้อมชื่อผู้รีวิวจากเพจร้านก่อนเปิดตัว
+export const reviewQuotes = [
+  {
+    text: "บรรยากาศริมน้ำ อาหารรสจัดจ้าน และมีมุมสบายสำหรับทุกคนในครอบครัว",
+    source: "ลูกค้าประจำ",
+  },
+  {
+    text: "ตำปูม้าเนื้อแน่นมาก น้ำปลาร้านัวจริง มาแล้วต้องสั่งซ้ำทุกครั้ง",
+    source: "รีวิวจากเพจร้าน",
+  },
+  {
+    text: "มานั่งฟังดนตรีตอนค่ำ ลมเย็นสบาย กาแฟก็ดี เป็นที่โปรดของกลุ่มเพื่อน",
+    source: "ลูกค้าช่วงค่ำ",
+  },
+] as const;
+
 export const sampleReviews = [
   "พื้นที่สำหรับรีวิวจริงของลูกค้า ความยาวประมาณ 2–3 บรรทัดจะแสดงผลสวยที่สุด",
   "ข้อความรีวิวตัวอย่างสำหรับจัดหน้าเว็บไซต์ รอคัดรีวิวจริงจากเพจของร้านมาแทน",
