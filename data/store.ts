@@ -31,7 +31,7 @@ export const menuItems = [
     categories: ["seafood"],
     badges: ["ขายดี", "อาหารทะเล"],
     slot: "รูปปูม้านึ่ง",
-    image: null,
+    image: "/images/steamed-blue-crab.webp",
   },
   {
     title: "อาหารทะเลสด",
@@ -39,7 +39,7 @@ export const menuItems = [
     categories: ["seafood"],
     badges: ["สดทุกวัน"],
     slot: "รูปอาหารทะเลสด",
-    image: null,
+    image: "/images/mixed-seafood-salad.webp",
   },
   {
     title: "เมนูยำ",
@@ -55,7 +55,7 @@ export const menuItems = [
     categories: ["drinks"],
     badges: ["คาเฟ่"],
     slot: "รูปกาแฟหรือเครื่องดื่ม",
-    image: null,
+    image: "/images/coffee-bar.jpg",
   },
   {
     title: "ของหวาน",
@@ -63,7 +63,7 @@ export const menuItems = [
     categories: ["drinks"],
     badges: ["ของหวาน"],
     slot: "รูปของหวาน",
-    image: null,
+    image: "/images/coconut-ice-cream.webp",
   },
 ] as const;
 
@@ -116,7 +116,7 @@ export const highlightDishes = [
   {
     title: "ปูม้านึ่ง",
     description: "นึ่งพอดี เสิร์ฟกับน้ำจิ้มซีฟู้ด",
-    image: null,
+    image: "/images/steamed-blue-crab.webp",
     badge: null,
     slot: "รูปปูม้านึ่ง",
   },
@@ -130,7 +130,7 @@ export const highlightDishes = [
   {
     title: "ยำรวมมิตรทะเล",
     description: "เปรี้ยว เค็ม หวาน เผ็ด ลงตัว",
-    image: null,
+    image: "/images/mixed-seafood-salad.webp",
     badge: null,
     slot: "รูปยำรวมมิตรทะเล",
   },
@@ -144,21 +144,21 @@ export const highlightDishes = [
   {
     title: "ของหวานประจำวัน",
     description: "ปิดท้ายมื้อด้วยความสดชื่น",
-    image: null,
+    image: "/images/coconut-ice-cream.webp",
     badge: null,
     slot: "รูปของหวาน",
   },
   {
     title: "ปลาเผาเกลือ",
     description: "หอมเกลือ เนื้อฉ่ำ เสิร์ฟทั้งตัว",
-    image: null,
+    image: "/images/salt-grilled-fish.webp",
     badge: null,
     slot: "รูปปลาเผาเกลือ",
   },
   {
     title: "ส้มตำไข่เค็ม",
     description: "มันไข่เค็มตัดรสแซ่บกำลังดี",
-    image: null,
+    image: "/images/salted-egg-som-tam.webp",
     badge: null,
     slot: "รูปส้มตำไข่เค็ม",
   },
