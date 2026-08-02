@@ -32,7 +32,14 @@ test("server-renders the restaurant website", async () => {
   assert.match(html, /ตำปูม้าคาเฟ่/);
   assert.match(html, /Food, Coffee, River &amp; Music/i);
   assert.match(html, /tel:0925353909/);
-  assert.match(html, /id="menu"/);
-  assert.match(html, /id="contact"/);
+  // depth-scroll scaffold: 9 scenes inside the sticky viewport stage
+  assert.match(html, /class="root"/);
+  assert.match(html, /class="stage"/);
+  assert.equal(html.match(/class="scene[" ]/g)?.length, 9);
+  // key sections of the redesign
+  assert.match(html, /จานไฮไลต์ของร้าน/);
+  assert.match(html, /สั่งอะไรดี/);
+  assert.match(html, /ดนตรีสดทุกค่ำคืน/);
+  assert.match(html, /เจอกันริมน้ำ/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/i);
 });
